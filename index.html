@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<!--    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="jogo.js"></script>
+    <style>
+        body {
+            overflow: hidden;
+        }
+        * {
+            --altura_text_area_code: 70vh;
+        }
+        .counted {
+            height: 100vh;
+        }
+        .counted div {
+            padding: 0 !important;
+        }
+        .counted div.areaCode {
+            position: absolute;
+            right: 0;
+            width: calc(100% - 600px);
+        }
+        .lines, .code {
+            height: var(--altura_text_area_code);
+            padding: 0;
+            border: none;
+            box-shadow: none !important;
+            outline: none !important;
+            margin: 0 !important;
+            font-size: 16pt;
+        }
+        .lines {
+            width: 100%;
+            text-align: center;
+            overflow-y: auto;
+            overflow-x: auto;
+        }
+        .lines::-webkit-scrollbar {
+            width: 0;
+        }
+        .code {
+            width: 100%;
+            background-color: beige;
+            padding-left: 10px;
+            padding-right: 10px;
+            resize: none;
+            overflow-wrap: normal;
+        }
+        .lines span {
+            display: block;
+            width: auto;
+            color: silver;
+        }
+        .areaCode table {
+            width: 100%;
+        }
+        .areaCode table tr td {
+            min-width: 0 !important;
+        }
+        #play {
+            cursor: pointer;
+            border-radius: 100%;
+            width: 60px;
+            height: auto;
+        }
+        #play:hover {
+            animation-name: example;
+            animation-duration: .3s;
+        }
+        @keyframes example {
+            25% {transform: rotateZ(20deg)}
+            50% {transform: rotateZ(-30deg)}
+            75% {transform: rotateZ(30deg)}
+            100% {transform: rotateZ(-20deg)}
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row counted">
+            <div>
+                <canvas id="game-canvas" width="600px"></canvas>
+            </div>
+            <div class="areaCode">
+                <table cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td style="max-width: 15px !important;">
+                            <div class="lines" id="linhas"><span>1</span></div>
+                        </td>
+                        <td>
+                            <textarea class="code" id="code"></textarea>
+                        </td>
+                    </tr>
+                </table>
+                <img src="https://img.icons8.com/dusk/64/000000/circled-play.png" title="Play" id="play"/>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
