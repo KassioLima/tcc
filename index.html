@@ -10,78 +10,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="jogo.js"></script>
-    <style>
-        body {
-            overflow: hidden;
-        }
-        * {
-            --altura_text_area_code: 70vh;
-        }
-        .counted {
-            height: 100vh;
-        }
-        .counted div {
-            padding: 0 !important;
-        }
-        .counted div.areaCode {
-            position: absolute;
-            right: 0;
-            width: calc(100% - 600px);
-        }
-        .lines, .code {
-            height: var(--altura_text_area_code);
-            padding: 0;
-            border: none;
-            box-shadow: none !important;
-            outline: none !important;
-            margin: 0 !important;
-            font-size: 16pt;
-        }
-        .lines {
-            width: 100%;
-            text-align: center;
-            overflow-y: auto;
-            overflow-x: auto;
-        }
-        .lines::-webkit-scrollbar {
-            width: 0;
-        }
-        .code {
-            width: 100%;
-            background-color: beige;
-            padding-left: 10px;
-            padding-right: 10px;
-            resize: none;
-            overflow-wrap: normal;
-        }
-        .lines span {
-            display: block;
-            width: auto;
-            color: silver;
-        }
-        .areaCode table {
-            width: 100%;
-        }
-        .areaCode table tr td {
-            min-width: 0 !important;
-        }
-        #play {
-            cursor: pointer;
-            border-radius: 100%;
-            width: 60px;
-            height: auto;
-        }
-        #play:hover {
-            animation-name: example;
-            animation-duration: .3s;
-        }
-        @keyframes example {
-            25% {transform: rotateZ(20deg)}
-            50% {transform: rotateZ(-30deg)}
-            75% {transform: rotateZ(30deg)}
-            100% {transform: rotateZ(-20deg)}
-        }
-    </style>
+
+    <link rel="stylesheet" href="Style.css">
 </head>
 <body>
     <div class="container-fluid">
