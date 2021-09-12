@@ -64,6 +64,14 @@ $(document).ready(function(){
                 (chao.x + chao.largura), chao.y,
                 chao.largura, chao.altura,
             );
+
+            contexto.drawImage(
+                sprites,
+                chao.spriteX, chao.spriteY,
+                chao.largura, chao.altura,
+                (chao.x + 2 * chao.largura), chao.y,
+                chao.largura, chao.altura,
+            );
         },
     };
 
@@ -72,7 +80,7 @@ $(document).ready(function(){
         spriteY: 0,
         largura: 33,
         altura: 24,
-        x: 10,
+        x: 100,
         y: 10,
         desenha() {
             contexto.drawImage(
