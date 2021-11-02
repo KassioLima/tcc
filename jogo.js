@@ -13,6 +13,8 @@ $(document).ready(function(){
     const canvas = document.querySelector('#game-canvas');
     const contexto = canvas.getContext('2d');
     let sapoAlquimistaDirection = 0;
+    let sapoSpriteIndex = 0;
+    let stepCount = 1;
 
     // canvas.height = screen.availHeight;
 
@@ -46,8 +48,8 @@ $(document).ready(function(){
         spriteY: 0,
         largura: 399.25,
         altura: 640,
-        x: 10,
-        y: 10,
+        x: (1280 - 399.25) / 2,
+        y: 120,
         desenha() {
             executeComands();
             contexto.save();
@@ -101,24 +103,28 @@ $(document).ready(function(){
         while (comands.validComands.length > 0) {
             let comand = comands.validComands[0];
             if(comand.startsWith('step')) {
-                // flappyBird.desenha();
                 let step = Number(comand.split(' ')[1]);
                 if(step !== 0)
                 {
-                    //para baixo ou para cima
-                    if(sapoAlquimistaDirection === 90 || sapoAlquimistaDirection === 270) {
-                        sapoAlquimista.y = sapoAlquimista.y + (step < 0 ? -10 : 10); //cada step são 10px
-                    }
+                    sapoSpriteIndex = parseInt(stepCount / 4) % 4;
+                    sapoAlquimista.spriteX = 399.25 * sapoSpriteIndex;
+                    stepCount++;
                     // para direita ou esquerda
-                    else if(sapoAlquimistaDirection === 0 || sapoAlquimistaDirection === 180) {
+                    if(sapoAlquimistaDirection === 90 || sapoAlquimistaDirection === 270) {
                         sapoAlquimista.x = sapoAlquimista.x + (step < 0 ? -10 : 10); //cada step são 10px
+                    }
+                    //para baixo ou para cima
+                    else if(sapoAlquimistaDirection === 0 || sapoAlquimistaDirection === 180) {
+                        sapoAlquimista.y = sapoAlquimista.y + (step < 0 ? -10 : 10); //cada step são 10px
                     }
                     step = step < 0 ? step + 1 : step - 1;
                     comands.validComands[0] = 'step ' + step;
                     break;
                 }
-                else
+                else {
+                    sapoAlquimista.spriteX = 0;
                     comands.validComands.splice(0, 1);
+                }
             }
             else {
                 if(comand === 'right') {
