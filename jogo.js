@@ -10,17 +10,18 @@ $(document).ready(function(){
     let comands = {validComands: [], invalidComands: []};
     let running = false;
 
-    const sprites = new Image();
-    sprites.src = 'sprites.png';
-
     const canvas = document.querySelector('#game-canvas');
     const contexto = canvas.getContext('2d');
-    let flappyBirdDirection = 0;
+    let sapoAlquimistaDirection = 0;
 
-    canvas.height = screen.availHeight;
+    // canvas.height = screen.availHeight;
 
+    /**SAPO ALQUIMISTA*/
     const cenario = new Image();
     cenario.src = 'cenarioJogo.png';
+
+    const sapo = new Image();
+    sapo.src = 'spriteSapoAlquimista.png';
 
     const fundo = {
         spriteX: 0, //inicio da imagem
@@ -40,103 +41,31 @@ $(document).ready(function(){
         },
     };
 
-    // [Plano de Fundo]
-    const planoDeFundo = {
-        spriteX: 390,
-        spriteY: 0,
-        largura: 275,
-        altura: 204,
-        x: 0,
-        y: canvas.height - 204,
-        desenha() {
-            contexto.fillStyle = '#70c5ce';
-            contexto.fillRect(0,0, canvas.width, canvas.height)
-
-            contexto.drawImage(
-                sprites,
-                planoDeFundo.spriteX, planoDeFundo.spriteY,
-                planoDeFundo.largura, planoDeFundo.altura,
-                planoDeFundo.x, planoDeFundo.y,
-                planoDeFundo.largura, planoDeFundo.altura,
-            );
-
-            contexto.drawImage(
-                sprites,
-                planoDeFundo.spriteX, planoDeFundo.spriteY,
-                planoDeFundo.largura, planoDeFundo.altura,
-                (planoDeFundo.x + planoDeFundo.largura), planoDeFundo.y,
-                planoDeFundo.largura, planoDeFundo.altura,
-            );
-
-            contexto.drawImage(
-                sprites,
-                planoDeFundo.spriteX, planoDeFundo.spriteY,
-                planoDeFundo.largura, planoDeFundo.altura,
-                (planoDeFundo.x + 2 * planoDeFundo.largura), planoDeFundo.y,
-                planoDeFundo.largura, planoDeFundo.altura,
-            );
-        },
-    };
-
-    // [Chao]
-    let chao = {
-        spriteX: 0,
-        spriteY: 610,
-        largura: 224,
-        altura: 112,
-        x: 0,
-        y: canvas.height - 112,
-        desenha() {
-            contexto.drawImage(
-                sprites,
-                chao.spriteX, chao.spriteY,
-                chao.largura, chao.altura,
-                chao.x, chao.y,
-                chao.largura, chao.altura,
-            );
-
-            contexto.drawImage(
-                sprites,
-                chao.spriteX, chao.spriteY,
-                chao.largura, chao.altura,
-                (chao.x + chao.largura), chao.y,
-                chao.largura, chao.altura,
-            );
-
-            contexto.drawImage(
-                sprites,
-                chao.spriteX, chao.spriteY,
-                chao.largura, chao.altura,
-                (chao.x + 2 * chao.largura), chao.y,
-                chao.largura, chao.altura,
-            );
-        },
-    };
-
-    let flappyBird = {
+    const sapoAlquimista = {
         spriteX: 0,
         spriteY: 0,
-        largura: 33,
-        altura: 24,
+        largura: 399.25,
+        altura: 640,
         x: 10,
         y: 10,
         desenha() {
             executeComands();
             contexto.save();
-            contexto.translate(flappyBird.x + (flappyBird.largura / 2), flappyBird.y + (flappyBird.altura / 2));
-            contexto.rotate(flappyBirdDirection * Math.PI / 180);
+            let tamanhoNaTelaX = sapoAlquimista.largura * .3;
+            let tamanhoNaTelaY = sapoAlquimista.altura * .3;
+            contexto.translate(sapoAlquimista.x + (sapoAlquimista.largura / 2), sapoAlquimista.y + (sapoAlquimista.altura / 2));
+            contexto.rotate(sapoAlquimistaDirection * Math.PI / 180);
             contexto.drawImage(
-                sprites,
-                flappyBird.spriteX, flappyBird.spriteY, // Sprite X, Sprite Y
-                flappyBird.largura, flappyBird.altura, // Tamanho do recorte na sprite
-                -flappyBird.largura / 2, -flappyBird.altura / 2,
-                flappyBird.largura, flappyBird.altura
+                sapo,
+                sapoAlquimista.spriteX, sapoAlquimista.spriteY, // Sprite X, Sprite Y
+                sapoAlquimista.largura, sapoAlquimista.altura, // Tamanho do recorte na sprite
+                -tamanhoNaTelaX / 2, -tamanhoNaTelaY / 2,
+                tamanhoNaTelaX, tamanhoNaTelaY
             );
             contexto.restore();
         }
     }
-    let flappyBirdAux = {};
-    Object.assign(flappyBirdAux, flappyBird);
+    /**FIM SAPO ALQUIMISTA*/
 
     function getComands(lines = []) {
 
@@ -177,12 +106,12 @@ $(document).ready(function(){
                 if(step !== 0)
                 {
                     //para baixo ou para cima
-                    if(flappyBirdDirection === 90 || flappyBirdDirection === 270) {
-                        flappyBird.y = flappyBird.y + (step < 0 ? -10 : 10); //cada step são 10px
+                    if(sapoAlquimistaDirection === 90 || sapoAlquimistaDirection === 270) {
+                        sapoAlquimista.y = sapoAlquimista.y + (step < 0 ? -10 : 10); //cada step são 10px
                     }
                     // para direita ou esquerda
-                    else if(flappyBirdDirection === 0 || flappyBirdDirection === 180) {
-                        flappyBird.x = flappyBird.x + (step < 0 ? -10 : 10); //cada step são 10px
+                    else if(sapoAlquimistaDirection === 0 || sapoAlquimistaDirection === 180) {
+                        sapoAlquimista.x = sapoAlquimista.x + (step < 0 ? -10 : 10); //cada step são 10px
                     }
                     step = step < 0 ? step + 1 : step - 1;
                     comands.validComands[0] = 'step ' + step;
@@ -193,15 +122,15 @@ $(document).ready(function(){
             }
             else {
                 if(comand === 'right') {
-                    flappyBirdDirection += 90
-                    if(flappyBirdDirection >= 360) {
-                        flappyBirdDirection -= 360;
+                    sapoAlquimistaDirection += 90
+                    if(sapoAlquimistaDirection >= 360) {
+                        sapoAlquimistaDirection -= 360;
                     }
                 }
                 else if(comand === 'left') {
-                    flappyBirdDirection -= 90
-                    if(flappyBirdDirection < 0) {
-                        flappyBirdDirection += 360;
+                    sapoAlquimistaDirection -= 90
+                    if(sapoAlquimistaDirection < 0) {
+                        sapoAlquimistaDirection += 360;
                     }
                 }
                 comands.validComands.splice(0, 1);
@@ -215,11 +144,8 @@ $(document).ready(function(){
     }
 
     function loop(repetir = true) {
-
-        // planoDeFundo.desenha();
-        // chao.desenha();
-        // flappyBird.desenha();
         fundo.desenha();
+        sapoAlquimista.desenha();
 
         if(repetir) {
             setTimeout(() => {
