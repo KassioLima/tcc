@@ -111,11 +111,25 @@ $(document).ready(function(){
                     stepCount++;
                     // para direita ou esquerda
                     if(sapoAlquimistaDirection === 90 || sapoAlquimistaDirection === 270) {
-                        sapoAlquimista.x = sapoAlquimista.x + (step < 0 ? -10 : 10); //cada step são 10px
+                        //esquerda
+                        if(sapoAlquimistaDirection === 270) {
+                            sapoAlquimista.x = sapoAlquimista.x + (step < 0 ? 10 : -10); //cada step são 10px
+                        }
+                        //direita
+                        else {
+                            sapoAlquimista.x = sapoAlquimista.x + (step < 0 ? -10 : 10); //cada step são 10px
+                        }
                     }
                     //para baixo ou para cima
                     else if(sapoAlquimistaDirection === 0 || sapoAlquimistaDirection === 180) {
-                        sapoAlquimista.y = sapoAlquimista.y + (step < 0 ? -10 : 10); //cada step são 10px
+                        //para cima
+                        if(sapoAlquimistaDirection === 0) {
+                            sapoAlquimista.y = sapoAlquimista.y + (step < 0 ? 10 : -10); //cada step são 10px
+                        }
+                        //para baixo
+                        else {
+                            sapoAlquimista.y = sapoAlquimista.y + (step < 0 ? -10 : 10); //cada step são 10px
+                        }
                     }
                     step = step < 0 ? step + 1 : step - 1;
                     comands.validComands[0] = 'step ' + step;
