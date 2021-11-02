@@ -13,7 +13,7 @@ body {
 .counted div.areaCode {
     position: absolute;
     right: 0;
-    width: calc(100% - 600px);
+    width: calc(100% - 1280px);
 }
 .lines, .code {
     height: var(--altura_text_area_code);

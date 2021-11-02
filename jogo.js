@@ -19,6 +19,27 @@ $(document).ready(function(){
 
     canvas.height = screen.availHeight;
 
+    const cenario = new Image();
+    cenario.src = 'cenarioJogo.png';
+
+    const fundo = {
+        spriteX: 0, //inicio da imagem
+        spriteY: 0, //inicio da imagem
+        largura: 1280,
+        altura: 851,
+        x: 0,
+        y: 0,
+        desenha() {
+            contexto.drawImage(
+                cenario,
+                fundo.spriteX, fundo.spriteY,
+                fundo.largura, fundo.altura,
+                fundo.x, fundo.y,
+                fundo.largura, fundo.altura,
+            );
+        },
+    };
+
     // [Plano de Fundo]
     const planoDeFundo = {
         spriteX: 390,
@@ -155,8 +176,14 @@ $(document).ready(function(){
                 let step = Number(comand.split(' ')[1]);
                 if(step !== 0)
                 {
-                    // if(flappyBirdDirection % 90)
-                    flappyBird.x = flappyBird.x + (step < 0 ? -10 : 10); //cada step são 10px
+                    //para baixo ou para cima
+                    if(flappyBirdDirection === 90 || flappyBirdDirection === 270) {
+                        flappyBird.y = flappyBird.y + (step < 0 ? -10 : 10); //cada step são 10px
+                    }
+                    // para direita ou esquerda
+                    else if(flappyBirdDirection === 0 || flappyBirdDirection === 180) {
+                        flappyBird.x = flappyBird.x + (step < 0 ? -10 : 10); //cada step são 10px
+                    }
                     step = step < 0 ? step + 1 : step - 1;
                     comands.validComands[0] = 'step ' + step;
                     break;
@@ -167,9 +194,15 @@ $(document).ready(function(){
             else {
                 if(comand === 'right') {
                     flappyBirdDirection += 90
+                    if(flappyBirdDirection >= 360) {
+                        flappyBirdDirection -= 360;
+                    }
                 }
                 else if(comand === 'left') {
                     flappyBirdDirection -= 90
+                    if(flappyBirdDirection < 0) {
+                        flappyBirdDirection += 360;
+                    }
                 }
                 comands.validComands.splice(0, 1);
             }
@@ -183,9 +216,10 @@ $(document).ready(function(){
 
     function loop(repetir = true) {
 
-        planoDeFundo.desenha();
-        chao.desenha();
-        flappyBird.desenha();
+        // planoDeFundo.desenha();
+        // chao.desenha();
+        // flappyBird.desenha();
+        fundo.desenha();
 
         if(repetir) {
             setTimeout(() => {
