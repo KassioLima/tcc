@@ -67,6 +67,9 @@ $(document).ready(function(){
             contexto.restore();
         }
     }
+    const sapoAlquimistaAux = {};
+    Object.assign(sapoAlquimistaAux, sapoAlquimista);
+
     /**FIM SAPO ALQUIMISTA*/
 
     function getComands(lines = []) {
@@ -157,8 +160,6 @@ $(document).ready(function(){
             }
             if(comands.validComands.length === 0) {
                 // alert('Todos os comandos foram executados');
-                // Object.assign(flappyBird, flappyBirdAux);
-                // loop(false);
             }
         }
     }
@@ -177,11 +178,16 @@ $(document).ready(function(){
     loop(false);
 
     $("#play").click(function(){
-        comands = $('#code')[0].value.length > 0 ? getComands($('#code')[0].value.split('\n')) : comands;
+        comands = $('#code')[0].value.length > 0 ? getComands($('#code')[0].value.split('\n').filter(c => c.length > 0)) : comands;
         if(!running && !comands.invalidComands.length && comands.validComands.length) {
             running = true;
             loop();
         }
+    });
+
+    $('#reset').on('click', function () {
+        Object.assign(sapoAlquimista, sapoAlquimistaAux);
+        sapoAlquimistaDirection = 0;
     });
 
     $("#code").on("input", function() {

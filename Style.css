@@ -52,13 +52,13 @@ body {
 .areaCode table tr td {
     min-width: 0 !important;
 }
-#play {
+.botao {
     cursor: pointer;
     border-radius: 100%;
     width: 60px;
     height: auto;
 }
-#play:hover {
+.botao:hover {
     animation-name: example;
     animation-duration: .3s;
 }
