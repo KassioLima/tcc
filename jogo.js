@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    
     console.log('[EXEMPLO] Flappy Bird');
 
     const comandos = new Map();
