@@ -6,6 +6,8 @@ $(document).ready(function(){
 
     comandos.set('left', 'left');
     comandos.set('right', 'right');
+    comandos.set('up', 'up');
+    comandos.set('down', 'down');
     comandos.set('step', new RegExp('step [- +]?[0-9]+', 'g'));
 
     let comands = {validComands: [], invalidComands: []};
@@ -24,7 +26,7 @@ $(document).ready(function(){
     cenario.src = 'cenarioJogo.png';
 
     const sapo = new Image();
-    sapo.src = 'spriteSapoAlquimista.png';
+    sapo.src = 'frogTopView.png';
 
     const fundo = {
         spriteX: 0, //inicio da imagem
@@ -47,9 +49,9 @@ $(document).ready(function(){
     const sapoAlquimista = {
         spriteX: 0,
         spriteY: 0,
-        largura: 399.25,
-        altura: 640,
-        x: (1280 - 399.25) / 2,
+        largura: 670,
+        altura: 670,
+        x: (1280 - 670) / 2,
         y: 120,
         desenha() {
             executeComands();
@@ -110,29 +112,32 @@ $(document).ready(function(){
                 let step = Number(comand.split(' ')[1]);
                 if(step !== 0)
                 {
-                    sapoSpriteIndex = parseInt(stepCount / 4) % 4;
-                    sapoAlquimista.spriteX = 399.25 * sapoSpriteIndex;
+                    sapoSpriteIndex = parseInt(stepCount / 6) % 6;
+                    sapoAlquimista.spriteX = 670 * sapoSpriteIndex;
+                    sapoAlquimista.spriteY = 670;
                     stepCount++;
+
                     // para direita ou esquerda
                     if(sapoAlquimistaDirection === 90 || sapoAlquimistaDirection === 270) {
                         //esquerda
                         if(sapoAlquimistaDirection === 270) {
-                            sapoAlquimista.x = sapoAlquimista.x + (step < 0 ? 10 : -10); //cada step são 10px
+                            sapoAlquimista.x = sapoAlquimista.x + (step < 0 ? -10 : 10); //cada step são 10px
                         }
                         //direita
                         else {
-                            sapoAlquimista.x = sapoAlquimista.x + (step < 0 ? -10 : 10); //cada step são 10px
+                            sapoAlquimista.x = sapoAlquimista.x + (step < 0 ? 10 : -10); //cada step são 10px
                         }
                     }
+
                     //para baixo ou para cima
                     else if(sapoAlquimistaDirection === 0 || sapoAlquimistaDirection === 180) {
-                        //para cima
-                        if(sapoAlquimistaDirection === 0) {
-                            sapoAlquimista.y = sapoAlquimista.y + (step < 0 ? 10 : -10); //cada step são 10px
-                        }
                         //para baixo
-                        else {
+                        if(sapoAlquimistaDirection === 0) {
                             sapoAlquimista.y = sapoAlquimista.y + (step < 0 ? -10 : 10); //cada step são 10px
+                        }
+                        //para cima
+                        else {
+                            sapoAlquimista.y = sapoAlquimista.y + (step < 0 ? 10 : -10); //cada step são 10px
                         }
                     }
                     step = step < 0 ? step + 1 : step - 1;
@@ -145,17 +150,18 @@ $(document).ready(function(){
                 }
             }
             else {
+
                 if(comand === 'right') {
-                    sapoAlquimistaDirection += 90
-                    if(sapoAlquimistaDirection >= 360) {
-                        sapoAlquimistaDirection -= 360;
-                    }
+                    sapoAlquimistaDirection = 270
                 }
                 else if(comand === 'left') {
-                    sapoAlquimistaDirection -= 90
-                    if(sapoAlquimistaDirection < 0) {
-                        sapoAlquimistaDirection += 360;
-                    }
+                    sapoAlquimistaDirection = 90
+                }
+                else if(comand === 'up') {
+                    sapoAlquimistaDirection = 180
+                }
+                else if(comand === 'down') {
+                    sapoAlquimistaDirection = 0
                 }
                 comands.validComands.splice(0, 1);
             }
